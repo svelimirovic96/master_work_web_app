@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 12, 2021 10:31:11 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="beans.Prijava" table="prijava" catalog="master" optimistic-lock="version">
+        <id name="idPrijava" type="java.lang.Integer">
+            <column name="IdPrijava" />
+            <generator class="identity" />
+        </id>
+        <property name="idStudent" type="string">
+            <column name="IdStudent" length="32" not-null="true" />
+        </property>
+        <property name="idMentor" type="string">
+            <column name="IdMentor" length="32" not-null="true" />
+        </property>
+        <property name="idMentorZ" type="string">
+            <column name="IdMentorZ" length="32" />
+        </property>
+        <property name="idRukovodilac" type="string">
+            <column name="IdRukovodilac" length="32" not-null="true" />
+        </property>
+        <property name="idRad" type="int">
+            <column name="IdRad" not-null="true" />
+        </property>
+        <property name="idPredmet" type="java.lang.Integer">
+            <column name="IdPredmet" />
+        </property>
+        <property name="rukIliProf" type="int">
+            <column name="RukIliProf" not-null="true" />
+        </property>
+        <property name="biografija" type="string">
+            <column name="Biografija" length="2000" />
+        </property>
+        <property name="idRukRada" type="string">
+            <column name="IdRukRada" length="32" />
+        </property>
+        <property name="idKom1" type="string">
+            <column name="IdKom1" length="32" />
+        </property>
+        <property name="idKom2" type="string">
+            <column name="IdKom2" length="32" />
+        </property>
+        <property name="datum" type="date">
+            <column name="Datum" length="10" />
+        </property>
+        <property name="prihvata" type="java.lang.Integer">
+            <column name="Prihvata" />
+        </property>
+        <property name="sugestija" type="string">
+            <column name="Sugestija" length="2000" />
+        </property>
+        <property name="datumS" type="date">
+            <column name="DatumS" length="10" />
+        </property>
+        <property name="predsednikKomisije" type="string">
+            <column name="PredsednikKomisije" length="50" />
+        </property>
+        <property name="imaGreske" type="int">
+            <column name="ImaGreske" not-null="true" />
+        </property>
+        <property name="prijavljena" type="int">
+            <column name="Prijavljena" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

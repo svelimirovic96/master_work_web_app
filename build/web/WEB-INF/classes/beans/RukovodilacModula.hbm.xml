@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 12, 2021 10:31:11 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="beans.RukovodilacModula" table="rukovodilac_modula" catalog="master" optimistic-lock="version">
+        <id name="username" type="string">
+            <column name="Username" length="32" />
+            <generator class="assigned" />
+        </id>
+        <property name="usernameZ" type="string">
+            <column name="UsernameZ" length="32" />
+        </property>
+        <property name="idModul" type="int">
+            <column name="IdModul" not-null="true" />
+        </property>
+        <property name="sprecen" type="int">
+            <column name="Sprecen" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

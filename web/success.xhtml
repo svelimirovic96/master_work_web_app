@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+     <h:head>
+        <title>Систем за пријаву мастер радова</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link href="pocetna.css" rel="stylesheet" type="text/css" />
+    </h:head>
+    <h:body>
+        <ui:include src="./header.xhtml"/>
+         <div align="left">
+         <h:outputText value="Студентска служба" style="font-size:30px; color: lightgray"/><br/>
+         <h:outputText value="#{login.ime} #{login.prezime}" style="font-size:30px; color: lightgray"/>
+         </div>
+        <br/>
+        <br/>
+        <br/>
+        <h:form>
+            <div align="left" style="font-size: 20pt; border: black solid medium">
+                <h:outputText value="Извештај: " style="color: red; font-weight: 200; font-size: 40pt; font-style: italic"/><br/>
+                <h:outputText style="color: red" value="Већ сте потврдили пријаву студента." rendered="#{(not sluzbaPrijava.prijavljeno)}"/>
+                <h:outputText style="color: red" value="Успешно сте потврдили пријаву студента." rendered="#{sluzbaPrijava.prijavljeno}"/>
+                <br/>
+            </div>
+            <br/><br/>
+        </h:form>
+         <div id="vrh" width="100%" height="100px" style="background-image: url(background-solid-line-cell-wallpaper-preview.jpg); border-bottom: 3px solid beige; padding-top:30px; position:relative; bottom:-200px; left:0; padding-bottom: 50px;">
+            <h:form>   
+            <div align="center" style="padding-top: 5px">
+                 <p:commandButton value="Назад" action="sluzba_pocetna" style="font-size: 25px; border-radius: 25pt 25pt; border-style: double; border-width: 2px;"/>
+            </div>
+            </h:form>
+        </div>
+    </h:body>
+</html>
+

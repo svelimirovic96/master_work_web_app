@@ -1,0 +1,275 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:rich="http://richfaces.org/rich">
+    <h:head>
+        <link href="pocetna.css" rel="stylesheet" type="text/css" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <title>Систем за пријаву мастер радова</title>
+          
+    </h:head>
+    <h:body>
+        <ui:include src="./header.xhtml"/>
+        <div id="top">
+        <br/><br/><h:outputLabel style="border-bottom: 1px solid black; border-width: 3px; font-weight: bold; font-style: italic; font-size: 40px;">
+            Пријава теме за израду мастер рада</h:outputLabel>
+        <br/>
+        <br/>
+        </div>
+        <h:form>
+            <div align="center" style="padding-top: 40px">
+            <h:commandButton value="Одустаните од измене" action="#{kom.vratiPod()}" style="display: block; font-size: 30px;"/>
+        </div>
+            <br/>
+            <table align="center" cellpadding="10" cellspacing="1" style="width:1216px; border:1px solid black; border-collapse: collapse">
+              <tr>
+                    <td style="border:1px solid black">
+                        <p style="margin: 1px 5px; margin-right: 5em">Име и презиме студента:</p>
+                    </td>
+                    <td style="border:1px solid black">
+                        <h:inputText size="100" id="name" required="true" readonly="true" requiredMessage="Унесите Ваше име и презиме!" value="#{login.ime} #{login.prezime}">
+                            <f:passThroughAttribute name="placeholder" value="Унесите Ваше име и презиме"/>
+                        </h:inputText>
+                        <rich:message for="name" ajaxRendered="true"></rich:message>
+                    </td>
+                </tr> 
+                <tr>
+                    <td style="border:1px solid black">
+                        <p style="margin: 1px 5px; margin-right: 5em">Број индекса:</p>
+                    </td>
+                    <td style="border:1px solid black">
+                        <h:inputText size="100" id="indeks" readonly="true" requiredMessage="Унесите Ваш број индекса!" required="true" value="#{kom.indexStudent}">
+                            <f:passThroughAttribute name="placeholder" value="Унесите Ваш број индекса"/>
+                        </h:inputText>
+                        <rich:message for="indeks" ajaxRendered="true" ></rich:message>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="border:1px solid black">
+                         <p style="margin: 1px 5px; margin-right: 5em">Изборно подручје мастер студија:</p>
+                    </td>
+                    <td style="border:1px solid black">
+                        <h:inputText size="100" value="#{kom.nazivModula}" id="modul" readonly="true" requiredMessage="Унесите Ваше изборно подручје!" required="true">
+                            <f:passThroughAttribute name="placeholder" value="Унесите Ваше изборно подручје"/>
+                        </h:inputText>
+                    </td>
+                </tr>
+                 <tr>
+                    <td style="border:1px solid black">
+                          <p style="margin: 1px 5px; margin-right: 5em">Име и презиме руководиоца рада:</p>
+                    </td>
+                    <td style="border:1px solid black">
+                        <h:selectOneMenu style="width:50%;" value="#{kom.ipMentor}" onchange="submit()" valueChangeListener="#{kom.change_Mentor}">
+                            <f:selectItems value="#{kom.mentorList}" />
+                         </h:selectOneMenu>
+                        </td>
+                </tr>
+                 <tr>
+                    <td style="border:1px solid black">
+                        <h:selectBooleanCheckbox value="#{kom.rukovodilac}" onclick="submit()" valueChangeListener="#{kom.box1}"/>
+                    </td>
+                    <td style="border:1px solid black">
+                         <p style="margin: 1px 5px">Руководилац рада је ангажован на изборном подручју мастер студија</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="border:1px solid black">
+                       <h:selectBooleanCheckbox value="#{kom.mentorRada}" onclick="submit()" valueChangeListener="#{kom.box2}"/>
+                    </td>
+                    <td style="border:1px solid black;">
+                        <p style="margin: 1px 5px; float:left;">Руководилац рада није ангажован на изборном подручју мастер студија али је кандидат код њега положио предмет:</p>
+                        <h:selectOneMenu style="width:50%;" value="#{kom.nazivPredmeta}" disabled="#{kom.rukovodilac}">
+                            <f:selectItems value="#{kom.listaPredmeta}" />
+                        </h:selectOneMenu>
+                    </td>
+                </tr>
+                 <tr>
+                    <td colspan="2" style="border:1px solid black">
+                        <p style="margin: 1px 5px; margin-right: 10em">Наслов мастер рада на српском језику (написан ћирилицом):</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="border:1px solid black">
+                        <h:inputTextarea rows="2" style="width:100%" id="s_naslov" value="#{kom.nazivRadSer}" required="false" requiredMessage="Напишите наслов мастер рада на српском језику!">
+                            <f:passThroughAttribute name="placeholder" value="Напишите наслов мастер рада на српском језику"/>
+                        </h:inputTextarea>
+                        <rich:message for="s_naslov" ajaxRendered="true"></rich:message>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="border:1px solid black">
+                         <p style="margin: 1px 5px; margin-right: 10em">Наслов мастер рада на енглеском језику:</p>
+                    </td>
+                </tr>
+                 <tr>
+                    <td colspan="2" style="border:1px solid black">
+                        <h:inputTextarea rows="2" style="width:100%" id="e_naslov" required="false" value="#{kom.nazivRadEn}" requiredMessage="Напишите наслов мастер рада на енглеском језику!">
+                            <f:passThroughAttribute name="placeholder" value="Напишите наслов мастер рада на енглеском језику"/>
+                         </h:inputTextarea>
+                        <rich:message for="e_naslov" ajaxRendered="true"></rich:message>
+                    </td>
+                </tr>
+                 <tr>
+                    <td colspan="2" style="border:1px solid black">
+                        <p style="margin: 1px 5px; margin-right: 10em">Предлог Комисије за преглед и оцену</p>
+                    </td>
+                </tr>
+                 <tr>
+                    <td colspan="2" style="border:1px solid black;">
+                        <p style="margin: 1px 5px; float:left;">1. Руководилац рада</p>
+                        <h:inputText size="60" value="#{kom.ipRukRad}" id="kom_mentor" style="float:left" readonly="true" required="false">
+                           <!-- <f:passThroughAttribute name="placeholder" value="Унесите 1. члана Комисије"/> -->
+                        </h:inputText>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="border:1px solid black">
+                        <p style="margin: 1px 5px; float:left;">2. </p>
+                        <h:inputText size="60" value="#{kom.ipKom1}" style="float:left" required="false" readonly="true">
+                          <!--  <f:passThroughAttribute name="placeholder" value="Унесите 2. члана Комисије"/> -->
+                        </h:inputText>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="border:1px solid black">
+                        <p style="margin: 1px 5px; float:left">3. </p>
+                        <h:inputText size="60" value="#{kom.ipKom2}" style="float:left" required="false" readonly="true">
+                           <!-- <f:passThroughAttribute name="placeholder" value="Унесите 3. члана Комисије"/> -->
+                        </h:inputText>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="border:1px solid black">
+                        <p style="margin: 1px 5px; float:left">У Београду </p>
+                        <h:inputText size="20" value="#{kom.datum}" style="float:left;" id="datum" required="false" readonly="true" requiredMessage="Унесите датум!">
+                           <!--  <f:passThroughAttribute name="placeholder" value="Унесите датум"/>-->
+                        </h:inputText>
+                        <p style="margin: 1px 5px; float:left">године </p>
+                        <rich:message for="datum" ajaxRendered="true"></rich:message>
+                    </td>
+                </tr>
+            </table>
+            <table align="center" cellpadding="10" cellspacing="1" style="border:1px solid black; border-top-style: none; border-collapse: collapse">
+              <tr>
+                    <td align="center" style="border:1px solid black;  border-top-style: none;">
+                        <p  style="margin: 1px 5px">Кандидат</p>
+                    </td>
+                    <td align="center" style="border:1px solid black;  border-top-style: none;">
+                        <p  style="margin: 1px 5px">Руководилац рада</p>
+                    </td>
+                    <td align="center"  style="border:1px solid black; border-top-style: none; ">
+                        <p  style="margin: 1px 5px">Руководилац изборног подручја</p> 
+                    </td>
+                </tr>
+                <tr>
+                    <td  align="center" style="border:1px solid black">
+                        <h:inputText size="60" id="kandidat" readonly="true" required="true" requiredMessage="Унесите кандидата!" value="#{login.ime} #{login.prezime}">
+                           <f:passThroughAttribute name="placeholder" value="Унесите кандидата"/>
+                        </h:inputText>  
+                        <rich:message for="kandidat" ajaxRendered="true"></rich:message>
+                    </td>
+                    <td  align="center" style="border:1px solid black">
+                        <h:inputText size="60"  id="mentor" readonly="true" required="true" requiredMessage="Унесите руководиоца рада!" value="#{kom.ipMentor1}">
+                           <f:passThroughAttribute name="placeholder" value="Унесите руководиоца рада"/>
+                        </h:inputText>  
+                        <rich:message for="mentor" ajaxRendered="true"></rich:message>
+
+                    </td>
+                    <td  align="center" style="border:1px solid black">
+                        <h:inputText size="60" id="ruk_podr" value="#{kom.ipRuk}" readonly="true" required="true" requiredMessage="Унесите руководиоца изборног подручја!">
+                        </h:inputText>
+                    </td>
+                </tr>
+            </table>
+            <div align="center" style="padding-top: 40px">
+                <!--<h:commandButton value="Назад на почетну страну" action="student_pocetna" style="display: inline-block; font-size: 30px;"/>-->
+                <h:commandButton value="Извршити измене" action="#{kom.proveri1()}" style="display: inline-block; font-size: 30px;"/>
+                <h:commandButton value="Биографија студента" action="biografija_izmena_1" style="display: inline-block; font-size: 30px;"/>
+                <h:commandButton value="Образложење пријаве" action="obrazlozenje_izmena_1" style="display: inline-block; font-size: 30px;"/>
+            </div>
+            <div align="left">
+                 <h:outputText value="" id="izmena_1" binding="#{kom.messagePrijava_1}"/>
+                 <rich:message for="izmena_1" ajaxRendered="true"></rich:message><br/>
+                 <h:outputText value="" id="izmena_1a" binding="#{kom.messagePrijava_1a}"/>
+                 <rich:message for="izmena_1a" ajaxRendered="true"></rich:message>
+            </div>
+        </h:form>
+        
+        
+        <div style="margin-top: 20px; margin-left: 70px;">  
+        <h:outputLabel style="font-weight: bold">ПРИЛОЗИ
+        </h:outputLabel>
+        <br/><h:outputLabel>
+            -образложење теме (са потписима предложеног Руководиоца израде рада и кандидата)
+        </h:outputLabel>
+        <br/><h:outputLabel>
+                -биографски подаци кандидата (са потписом кандидата)
+            </h:outputLabel>
+        <br/>
+        </div>
+        
+        <h:form>
+            <table align="center" cellpadding="10" cellspacing="1" style="width:1225px; border:1px solid black; border-collapse: collapse; margin-top: 20px">
+                <tr>
+                    <td colspan="2" style="border:1px solid black;">
+                        <h:outputLabel style="font-weight: bold; font-style: italic">ЗАКЉУЧАК  КОМИСИЈЕ ЗА СТУДИЈЕ  II СТЕПЕНА</h:outputLabel>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="border:1px solid black;">
+                        
+                    </td>
+                    <td  style="border:1px solid black;">
+                        <p style="margin: 1px 5px;">Прихвата се</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td  style="border:1px solid black;">
+                        
+                    </td>
+                    <td  style="border:1px solid black;">
+                        <p style="margin: 1px 5px;">Одбија се</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td  style="border:1px solid black;">
+                        
+                    </td>
+                    <td  style="border:1px solid black;">
+                        <p style="margin: 1px 5px;">Прихвата се уз сугестије</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="border:1px solid black;">
+                        <h:outputLabel>Образложење и сугестије</h:outputLabel>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="border:1px solid black;">
+                        <h:inputTextarea style="height: 100px; width:100%" disabled="true">
+                        </h:inputTextarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="27%" style="border:1px solid black;">
+                        <p style="margin: 1px 5px; float:left">У Београду </p>
+                        <h:inputText size="20" style="float:left;" disabled="true">
+                            <!-- <f:passThroughAttribute name="placeholder" value="Унесите датум"/> -->
+                        </h:inputText><p style="margin: 1px 5px; float:left">године </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="border:1px solid black;">
+                        <p style="margin: 1px 5px;">Председник Комисије</p>
+                    </td>
+                </tr>
+            </table>
+        </h:form>
+        <br/>
+        <div id="vrh" width="100%" height="100%" style="background-image: url(background-solid-line-cell-wallpaper-preview.jpg); border-bottom: 2px solid beige; padding-bottom: 100px; padding-top:40px; bottom:0;">
+        </div>
+    </h:body>
+</html>

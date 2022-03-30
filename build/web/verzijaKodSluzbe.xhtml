@@ -1,0 +1,428 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:rich="http://richfaces.org/rich">
+    <h:head>
+         <title>Систем за пријаву мастер радова</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link href="pocetna.css" rel="stylesheet" type="text/css" />
+    </h:head>
+    <h:body>
+        <ui:include src="./header.xhtml"/>
+           <div align="left">
+         <h:outputText value="Студентска служба" style="font-size:30px; color: lightgray"/><br/>
+         <h:outputText value="#{login.ime} #{login.prezime}" style="font-size:30px; color: lightgray"/>
+         </div>
+       <br/>
+    <p:tabView>
+        <p:tab title="Формулар пријаве теме">
+         
+            <h:form>
+             <div id="top">
+        <ui:insert name="top">
+        <img id="slika" src="etf_logo.png" style="height: 60px; width:50px"/>
+        <h:outputLabel style="font-weight: bold;">
+            УНИВЕРЗИТЕТ У БЕОГРАДУ - ЕЛЕКТРОТЕХНИЧКИ ФАКУЛТЕТ</h:outputLabel>
+        <br/><h:outputLabel>
+            Булевар краља Александра 73, 11000 Београд, Србија</h:outputLabel>
+        <br/><h:outputLabel>
+            Тел. 011/324-8464, Факс: 011/324-8681</h:outputLabel>
+        </ui:insert>
+        </div>
+        <div id="top">
+        <br/><br/><h:outputLabel style="border-bottom: 1px solid black; border-width: 3px; font-weight: bold; font-style: italic; font-size: 39px;">
+            Пријава теме за израду мастер рада</h:outputLabel>
+        <br/>
+        <br/>
+        </div>
+            <table align="center" cellpadding="10" cellspacing="1" style="width:800px; border:1px solid black; border-collapse: collapse">
+              <tr>
+                    <td width="33%" style="border:1px solid black">
+                        <p style="margin: 1px 5px;">Име и презиме студента:</p>
+                    </td>
+                    <td style="border:1px solid black">
+                        <h:outputText style="margin: 1px 5px; margin-right: 10em" value="#{sluzbaPrijava.ipStudent}"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="border:1px solid black">
+                        <p style="margin: 1px 5px;">Број индекса:</p>
+                    </td>
+                    <td style="border:1px solid black">
+                        <h:outputText style="margin: 1px 5px; margin-right: 10em" value="#{sluzbaPrijava.indexStudent}" />
+                    </td>
+                </tr>
+                <tr>
+                    <td style="border:1px solid black">
+                         <p style="margin: 1px 5px;">Изборно подручје мастер студија:</p>
+                    </td>
+                    <td style="border:1px solid black">
+                        <h:outputText style="margin: 1px 5px; margin-right: 10em" value="#{sluzbaPrijava.nazivModula}"/>
+                    </td>
+                </tr>
+                 <tr>
+                    <td style="border:1px solid black">
+                          <p style="margin: 1px 5px;">Име и презиме руководиоца рада:</p>
+                    </td>
+                    <td style="border:1px solid black">
+                        <h:outputText style="margin: 1px 5px; margin-right: 10em" value="#{sluzbaPrijava.ipMentor}"/>
+                     </td>
+                </tr>
+                </table>
+                <table align="center" cellpadding="10" cellspacing="1" style="width:800px; border:1px solid black; border-collapse: collapse; border-top-style: none">
+             
+                <tr>
+                   <td width="5%" style="border:1px solid black; border-top-style: none">
+                        <h:outputText style="margin: 1px 5px;" value="Да" rendered="#{sluzbaPrijava.rukovodilac}"/>
+                    </td>
+                    <td style="border:1px solid black; border-top-style: none">
+                         <p style="margin: 1px 5px">Руководилац рада је ангажован на изборном подручју мастер студија</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="5%" style="border:1px solid black">
+                        <h:outputText style="margin: 1px 5px;" value="Да" rendered="#{sluzbaPrijava.mentorRada}"/>
+                    </td>
+                    <td style="border:1px solid black;">
+                        <p style="margin: 1px 5px; float:left;">Руководилац рада није ангажован на изборном подручју мастер студија али је кандидат код њега положио предмет:</p>
+                        <h:outputText style="margin: 1px 5px; margin-right: 10em" value="#{sluzbaPrijava.nazivPredmeta1}"/>
+                        
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="border:1px solid black">
+                        <p style="margin: 1px 5px; margin-right: 10em">Наслов мастер рада на српском језику (написан ћирилицом):</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="border:1px solid black; height: 70px; width:100%;">
+                        <h:outputText style="margin: 1px 5px; margin-right: 10em" value="#{sluzbaPrijava.nazivRadSer}"/>
+                      </td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="border:1px solid black; ">
+                         <p style="margin: 1px 5px; margin-right: 10em">Наслов мастер рада на енглеском језику:</p>
+                    </td>
+                </tr>
+                 <tr>
+                    <td colspan="2" style="border:1px solid black; height: 70px; width:100%;">
+                        <h:outputText style="margin: 1px 5px; margin-right: 10em" value="#{sluzbaPrijava.nazivRadEn}"/>
+                    </td>
+                 </tr>
+                <tr>
+                    <td colspan="2" style="border:1px solid black">
+                        <p style="margin: 1px 5px; margin-right: 10em">Предлог Комисије за преглед и оцену</p>
+                    </td>
+                </tr>
+                 <tr>
+                    <td colspan="2" style="border:1px solid black;">
+                        <p style="margin: 1px 5px; float:left;">1. Руководилац рада</p>
+                        <h:outputText style="float:left" value="#{sluzbaPrijava.ipRukRad}"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="border:1px solid black">
+                        <p style="margin: 1px 5px; float:left;">2. </p>
+                        <h:outputText style="float:left" value="#{sluzbaPrijava.ipKom1}"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="border:1px solid black">
+                        <p style="margin: 1px 5px; float:left">3. </p>
+                        <h:outputText value="#{sluzbaPrijava.ipKom2}" style="float:left" />
+                         
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="border:1px solid black">
+                        <p style="margin: 1px 5px; float:left">У Београду </p>
+                        <h:outputText style="float:left;" value="#{sluzbaPrijava.datum}" />
+                        <p style="margin: 1px 5px; float:left">године </p>
+                        
+                    </td>
+                </tr>
+            </table>
+            <table align="center" cellpadding="10" cellspacing="1" style="width:800px; border:1px solid black; border-top-style: none; border-collapse: collapse">
+              <tr>
+                    <td align="center" style="border:1px solid black;  border-top-style: none;">
+                        <p  style="margin: 1px 5px">Кандидат</p>
+                    </td>
+                    <td align="center" style="border:1px solid black;  border-top-style: none;">
+                        <p  style="margin: 1px 5px">Руководилац рада</p>
+                    </td>
+                    <td align="center"  style="border:1px solid black; border-top-style: none; ">
+                        <p  style="margin: 1px 5px">Руководилац изборног подручја</p> 
+                    </td>
+                </tr>
+                <tr>
+                    <td  align="center" style="border:1px solid black">
+                        <h:outputText value="#{sluzbaPrijava.ipStudent}"/>
+                         
+                    </td>
+                    <td  align="center" style="border:1px solid black">
+                        <h:outputText value="#{sluzbaPrijava.ipMentor}"/>
+                        
+                    </td>
+                    <td  align="center" style="border:1px solid black">
+                        <h:outputText value="#{sluzbaPrijava.ipRuk}"/>
+                        
+                    </td>
+                </tr>
+            </table>
+            <div style="margin-top: 20px; margin-left: 250px;">  
+        <h:outputLabel style="font-weight: bold">ПРИЛОЗИ
+        </h:outputLabel>
+        <br/><h:outputLabel>
+            -образложење теме (са потписима предложеног Руководиоца израде рада и кандидата)
+        </h:outputLabel>
+        <br/><h:outputLabel>
+                -биографски подаци кандидата (са потписом кандидата)
+            </h:outputLabel>
+        <br/>
+        </div>
+        
+        <table align="center" cellpadding="10" cellspacing="1" style="width:800px; border:1px solid black; border-collapse: collapse; margin-top: 20px;">
+                <tr>
+                    <td colspan="2" style="border:1px solid black;">
+                        <h:outputLabel style="font-weight: bold; font-style: italic">ЗАКЉУЧАК  КОМИСИЈЕ ЗА СТУДИЈЕ  II СТЕПЕНА</h:outputLabel>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="5%" style="border:1px solid black;">
+                        <h:outputText style="margin: 1px 5px;" value="Да" rendered="#{sluzbaPrijava.prihvata}"/>
+                    
+                    </td>
+                    <td  style="border:1px solid black;">
+                        <p style="margin: 1px 5px;">Прихвата се</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="5%" style="border:1px solid black;">
+                        
+                        <h:outputText style="margin: 1px 5px;" value="Да" rendered="#{sluzbaPrijava.odbija}"/>
+                    
+                    </td>
+                    <td  style="border:1px solid black; ">
+                        <p style="margin: 1px 5px;">Одбија се</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="5%" style="border:1px solid black;">
+                        
+                        <h:outputText style="margin: 1px 5px;" value="Да" rendered="#{sluzbaPrijava.sugerisi}"/>
+                    
+                    </td>
+                    <td  style="border:1px solid black;">
+                        <p style="margin: 1px 5px;">Прихвата се уз сугестије</p>
+                    </td>
+                </tr>
+            </table>
+             <table align="center" cellpadding="10" cellspacing="1" style="width:800px; border:1px solid black; border-top-style: none; border-collapse: collapse">
+                <tr>
+                    <td colspan="2" style="border:1px solid black;border-top-style: none;">
+                        <h:outputLabel>Образложење и сугестије</h:outputLabel>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="border:1px solid black; height: 70px; width:100%;">
+                      <h:outputText value="#{sluzbaPrijava.sugestija}"/>
+                    </td>
+                </tr>
+                <tr>
+                     <td width="40%" style="border:1px solid black;">
+                        <p style="margin: 1px 5px; float:left">У Београду 
+                        </p>
+                        <h:outputText style="float:left;" value="#{sluzbaPrijava.datum2}" /><p style="margin: 1px 5px; float:left">године </p>
+                    </td>
+                    <td style="border:1px solid black; border-bottom-style:none">
+                    </td>
+                </tr>
+                <tr>
+                    <td style="border:1px solid black;">
+                        <p style="margin: 1px 5px;">Председник Комисије</p>
+                    </td>
+                    <td style="border:1px solid black; border-bottom-style:none; border-top-style: none;">
+                    </td>
+                </tr>
+            </table>
+                <div align="center" style="padding-top: 5px">
+                 <br/><br/>
+                 <h:commandButton value="Штампај" action="stampaj1S" disabled="#{not sluzbaPrijava.stampaj}" style="font-size: 25px; border-radius: 25pt 25pt; border-style: double; border-width: 2px;"/>
+            </div>
+            </h:form>
+        </p:tab>
+        <p:tab title="Биографија студента">
+           
+            <h:form>
+            <div id="top">
+        <ui:insert name="top">
+        <img id="slika" src="etf_logo.png" style="height: 60px; width:50px"/>
+        <h:outputLabel style="font-weight: bold;">
+            УНИВЕРЗИТЕТ У БЕОГРАДУ - ЕЛЕКТРОТЕХНИЧКИ ФАКУЛТЕТ</h:outputLabel>
+        <br/><h:outputLabel>
+            Булевар краља Александра 73, 11000 Београд, Србија</h:outputLabel>
+        <br/><h:outputLabel>
+            Тел. 011/324-8464, Факс: 011/324-8681</h:outputLabel>
+        </ui:insert>
+        </div>
+        <div id="top"><br/><br/><h:outputLabel style="font-weight: bold;font-size: 40px;">
+            БИОГРАФИЈА</h:outputLabel>
+        <br/>
+        <br/>
+        </div>
+           <div style="margin-left: 250px; margin-right: 250px; margin-bottom: 500px;">
+            <h:outputText value="&emsp;&emsp;#{sluzbaPrijava.bioText}" />
+           </div>
+        <br/>
+        <br/>
+        <div align="left" style="padding-top: 40px; padding-left: 900px;">
+           <h:outputLabel style="font-size: 12px;">
+            (потпис студента)</h:outputLabel>
+            <br/>_______________________________<br/>
+            <h:outputLabel style="font-size: 12px;">
+                Дипл.инж. Име Презиме</h:outputLabel>
+                   
+        </div>
+        <div align="center" style="padding-top: 5px">
+                 <br/><br/>
+                 <h:commandButton value="Штампај" action="stampaj2S" disabled="#{not sluzbaPrijava.stampaj}" style="font-size: 25px; border-radius: 25pt 25pt; border-style: double; border-width: 2px;"/>
+            </div>
+        </h:form>
+        </p:tab>
+        <p:tab title="Образложење теме мастер рада">
+           
+          <h:form><div id="top">
+        <ui:insert name="top">
+        <img id="slika" src="etf_logo.png" style="height: 60px; width:50px"/>
+        <h:outputLabel style="font-weight: bold;">
+            УНИВЕРЗИТЕТ У БЕОГРАДУ - ЕЛЕКТРОТЕХНИЧКИ ФАКУЛТЕТ</h:outputLabel>
+        <br/><h:outputLabel>
+            Булевар краља Александра 73, 11000 Београд, Србија</h:outputLabel>
+        <br/><h:outputLabel>
+            Тел. 011/324-8464, Факс: 011/324-8681</h:outputLabel>
+        </ui:insert>
+        </div>
+        <div style="padding: 30px; margin-left: 250px;">
+            <div>
+            <h:outputLabel style="font-weight: bold;">
+                Кандидат </h:outputLabel><u><h:outputText value="#{sluzbaPrijava.ipStudent}">
+            </h:outputText></u>
+            </div>
+            <br/>
+            <div>
+            <h:outputLabel style="font-weight: bold;">
+                Број индекса </h:outputLabel><u><h:outputText value="#{sluzbaPrijava.indexStudent}">
+                </h:outputText></u>
+            <h:outputLabel style="font-weight: bold;">
+                Модул </h:outputLabel> <u><h:outputText value="#{sluzbaPrijava.nazivModula}">
+                </h:outputText></u>
+            </div>
+            <br/>
+        </div>
+         <div id="top" style="margin-left: 350px;">
+        <h:outputLabel style="text-align:center; font-weight: bold; font-size: 20px;">
+            КОМИСИЈИ ЗА СТУДИЈЕ II СТЕПЕНА АКАДЕМСКИХ СТУДИЈА
+        </h:outputLabel>
+        </div>
+        <div style="padding: 30px; margin-left: 250px;">
+            <div>
+            <h:outputLabel style="font-weight: bold;">Предмет:</h:outputLabel>
+            </div>
+            <br/>
+            <div>
+                <h:outputLabel><span style="display: inline-block; margin-left: 40px;"></span>Пријава теме за израду мастер рада под насловом "</h:outputLabel>
+                <u><h:outputText value="#{sluzbaPrijava.nazivRadSer}">
+                </h:outputText></u>
+                <h:outputLabel>"</h:outputLabel>
+            </div>
+            <br/>
+            <div>
+                <h:outputLabel style="font-weight: bold;">Област мастер рада:</h:outputLabel>
+            </div>
+            <br/>
+            <div>
+                <h:outputLabel><span style="display: inline-block; margin-left: 40px;"></span>Наведена тема мастер рада припада области </h:outputLabel>
+              <u><h:outputText value="#{sluzbaPrijava.nazivPredmeta}">
+              </h:outputText></u>
+            </div>
+            <br/>
+            <div>
+                <h:outputLabel style="font-weight: bold;">Предмет, циљ и методе мастер рада:</h:outputLabel>
+            </div>
+            <br/>
+            <div>
+                <h:outputText value="&emsp;&emsp;#{sluzbaPrijava.radPredmet}" >
+                </h:outputText>
+            </div>
+            <br/>
+            <div>
+                <h:outputLabel style="font-weight: bold;">Садржај и очекивани резултати мастер рада:</h:outputLabel>
+            </div>
+            <br/>
+            <div>
+                <h:outputText value="&emsp;&emsp;#{sluzbaPrijava.radSadrzaj}">
+               </h:outputText>
+            </div>
+            <br/>
+        </div>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+        <div style="padding: 30px; margin-left: 250px;">
+            <div align="left">
+                <h:outputLabel style="font-weight: bold;">Предложени ментор:</h:outputLabel>
+            
+                <h:outputLabel style="font-weight: bold;">&emsp;&emsp;&emsp;&emsp;
+                    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;
+                    Кандидат:</h:outputLabel>
+            </div>
+            <div align="left">
+                <h:outputLabel>(потпис ментора)</h:outputLabel>
+           
+                <h:outputLabel>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+                    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+                    (потпис студента)</h:outputLabel>
+            </div>
+            <div align="left">
+                 <h:outputLabel>_______________________________</h:outputLabel>
+            
+                <h:outputLabel>&emsp;&emsp;&emsp;&emsp;&emsp;
+                    &emsp;&emsp;&emsp;
+                    ____________________________</h:outputLabel>
+            </div>
+            <div align="left">
+                <h:outputLabel>Др Име Презиме, звање</h:outputLabel>
+            
+                <h:outputLabel>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+                    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+                    Дипл. инж. Име Презиме</h:outputLabel>
+            </div>
+            <br/>
+        </div>
+            <div align="center" style="padding-top: 5px">
+                 <br/><br/>
+                 <h:commandButton value="Штампај" action="stampaj3S" disabled="#{not sluzbaPrijava.stampaj}" style="font-size: 25px; border-radius: 25pt 25pt; border-style: double; border-width: 2px;"/>
+            </div>
+        </h:form>
+        </p:tab>
+    </p:tabView>
+    <br/>
+        
+            <div id="vrh" width="100%" height="50%" style="background-image: url(background-solid-line-cell-wallpaper-preview.jpg); border-bottom: 3px solid beige; padding-top:5px; position:relative; bottom:-5px; left:0; padding-bottom: 20px;">
+                <h:form>
+             <div align="center" style="padding-top: 5px">
+                 <br/><br/>
+                 <h:commandButton value="Назад" action="listaVerzijaSluzba" style="font-size: 25px; border-radius: 25pt 25pt; border-style: double; border-width: 2px;"/>
+            </div>
+        </h:form>
+            </div>
+    </h:body>
+</html>
+
+
+

@@ -1,0 +1,145 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:rich="http://richfaces.org/rich">
+    <h:head>
+        <title>Систем за пријаву мастер радова</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link href="pocetna.css" rel="stylesheet" type="text/css" />
+    </h:head>
+    <h:body>
+        <ui:include src="./header.xhtml"/>
+        <h:form>
+        <div align="center" style="padding-top: 40px">
+            <h:commandButton value="Одустаните од пријаве" action="#{login.odustani()}" style="display: block; font-size: 25px; border-radius: 25pt 25pt; border-style: double; border-width: 2px;"/>
+        </div>
+            <br/>
+        <div style="padding: 30px">
+            <div>
+            <h:outputLabel style="font-weight: bold;">
+                Кандидат </h:outputLabel><h:inputText id="kandidat" readonly="true" style="width:91%" value="#{login.ime} #{login.prezime}" required="true" requiredMessage="Унесите Ваше име и презиме!">
+                    <f:passThroughAttribute name="placeholder" value="Име и презиме кандидата"/>
+            </h:inputText>
+            <rich:message for="kandidat" ajaxRendered="true"></rich:message>
+            </div>
+            <br/>
+            <div>
+            <h:outputLabel style="font-weight: bold;">
+                Број индекса </h:outputLabel><h:inputText readonly="true" id="indeks" value="#{login.indeksStudenta}" style="width:25%" required="true" requiredMessage="Унесите Ваш број индекса!">
+                    <f:passThroughAttribute name="placeholder" value="Број индекса"/>
+                </h:inputText>
+            <rich:message for="indeks" ajaxRendered="true"></rich:message>
+            <h:outputLabel style="font-weight: bold;">
+                Модул </h:outputLabel> <h:inputText size="100" value="#{login.nazivModula}" id="modul" readonly="true" requiredMessage="Унесите Ваше изборно подручје!" required="true">
+                            <f:passThroughAttribute name="placeholder" value="Унесите Ваше изборно подручје"/>
+                        </h:inputText>
+            </div>
+            <br/>
+        </div>
+        <div id="top">
+        <h:outputLabel style="font-weight: bold; font-size: 20px;">
+            КОМИСИЈИ ЗА СТУДИЈЕ II СТЕПЕНА АКАДЕМСКИХ СТУДИЈА
+        </h:outputLabel>
+        </div>
+        <div style="padding: 30px">
+            <div>
+            <h:outputLabel style="font-weight: bold;">Предмет:</h:outputLabel>
+            </div>
+            <br/>
+            <div>
+                <h:outputLabel><span style="display: inline-block; margin-left: 40px;"></span>Пријава теме за израду мастер рада под насловом "</h:outputLabel>
+                <h:inputText id="tema" value="#{prijavaB.temaSrpski}" readonly="true" size="100" required="true" requiredMessage="Унесите наслов теме!">
+                    <f:passThroughAttribute name="placeholder" value="Унесите наслов теме"/>
+                </h:inputText>
+                <h:outputLabel>"</h:outputLabel>
+                <rich:message for="tema" ajaxRendered="true"/>
+            </div>
+            <br/>
+            <div>
+                <h:outputLabel style="font-weight: bold;">Област мастер рада:</h:outputLabel>
+            </div>
+            <br/>
+            <div>
+                <h:outputLabel><span style="display: inline-block; margin-left: 40px;"></span>Наведена тема мастер рада припада области </h:outputLabel>
+               <!-- <h:inputText id="oblast" size="100" value="#{prijavaB.nazivPredmeta}" required="true" requiredMessage="Унесите област којој Ваша тема припада!">
+                    <f:passThroughAttribute name="placeholder" value="Унесите назив области"/>
+                </h:inputText>
+                <rich:message for="oblast" ajaxRendered="true"/>-->
+               <h:selectOneMenu style="width:50%;" value="#{biografija.nazivPredmeta}">
+                            <f:selectItems value="#{biografija.listaPredmeta()}" />
+                        </h:selectOneMenu>
+            </div>
+            <br/>
+            <div>
+                <h:outputLabel style="font-weight: bold;">Предмет, циљ и методе мастер рада:</h:outputLabel>
+            </div>
+            <br/>
+            <div>
+                <h:inputTextarea value="#{biografija.cilj}" rows="4" style="width:100%" id="dok_1" required="false" requiredMessage="Напишите предмет, циљ и методе мастер рада!">
+                    <f:passThroughAttribute name="placeholder" value="Предмет, циљ и методе мастер рада"/>
+                </h:inputTextarea>
+                <rich:message for="dok_1" ajaxRendered="true"/>
+            </div>
+            <br/>
+            <div>
+                <h:outputLabel style="font-weight: bold;">Садржај и очекивани резултати мастер рада:</h:outputLabel>
+            </div>
+            <br/>
+            <div>
+                <h:inputTextarea value="#{biografija.sadrzaj}" rows="4" style="width:100%" id="dok_2" required="false" requiredMessage="Напишите садржај и очекиване резултате мастер рада!">
+                    <f:passThroughAttribute name="placeholder" value="Садржај и очекивани резултати мастер рада"/>
+                </h:inputTextarea>
+                <rich:message for="dok_2" ajaxRendered="true"/>
+            </div>
+            <br/>
+        </div>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+        <div style="padding: 30px">
+            <div align="left">
+                <h:outputLabel style="font-weight: bold;">Предложени ментор:</h:outputLabel>
+            </div>
+            <div align="right">
+                <h:outputLabel style="font-weight: bold;">Кандидат:</h:outputLabel>
+            </div>
+            <div align="left">
+                <h:outputLabel>(потпис ментора)</h:outputLabel>
+            </div>
+            <div align="right">
+                <h:outputLabel>(потпис студента)</h:outputLabel>
+            </div>
+            <div align="left">
+                _______________________________
+            </div>
+            <div align="right">
+                _______________________________
+            </div>
+            <div align="left">
+                <h:outputLabel>Др Име Презиме, звање</h:outputLabel>
+            </div>
+            <div align="right">
+                <h:outputLabel>Дипл. инж. Име Презиме</h:outputLabel>
+            </div>
+            <br/>
+        </div>
+        <div align="center" style="padding-top: 40px">
+                <h:commandButton value="Завршити пријаву" action="#{biografija.obrProvera()}" style="display:block; font-size: 25px; border-radius: 25pt 25pt; border-style: double; border-width: 2px;"/>
+                
+        </div>
+         <div align="left">
+                 <h:outputText value="" id="prijava_3" binding="#{biografija.messagePrijava_3}"/>
+                 <rich:message for="prijava_3" ajaxRendered="true"></rich:message>
+            </div>
+        </h:form>
+         <br/>
+        <div id="vrh" width="100%" height="50%" style="background-image: url(background-solid-line-cell-wallpaper-preview.jpg); border-bottom: 3px solid beige; padding-top:5px; position:relative; bottom:-5px; left:0; padding-bottom: 20px;">
+             </div>
+    </h:body>
+</html>
+
+

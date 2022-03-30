@@ -1,0 +1,170 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+         <title>Систем за пријаву мастер радова</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link href="pocetna.css" rel="stylesheet" type="text/css" />
+    </h:head>
+    <h:body>
+       <ui:include src="./header.xhtml"/>
+        <div align="left">
+            <h:outputText value="Руководилац модула #{login.nazivModula}" style="font-size:30px; color: lightgray"/><br/>
+            <h:outputText value="Професор #{login.ime} #{login.prezime}" style="font-size:30px; color: lightgray"/>
+            </div>
+       <br/>
+        <h:form>
+            <div align="left">
+                 <h:outputText value="" id="spr" binding="#{login.messageSprecen}"/>
+                 <rich:message for="spr" ajaxRendered="true"></rich:message>
+                <br/>
+            </div>
+        </h:form>
+             <p:tabView>
+                 <p:tab title="Професор и руководилац" disabled="#{login.sprecen}">
+               <h:form>
+            <div align="center">
+                <h:outputText value="Списак пријава мастер тема студената"  style="font-size:40px; font-weight: 200; font-style: italic;"/><br/><br/>
+             <p:dataTable value="#{listaPrijavaZaMentora}" var="item" style="width:100%; border:1px solid black; border-collapse: collapse; font-size: 15px;">
+                <p:column style="text-align: center">
+                    <f:facet name="header">Редни број пријаве</f:facet>
+                    <p:outputLabel value="#{item.idPrijava}"/>
+                </p:column>
+                <p:column style="text-align: center">
+                    <f:facet name="header">Име и презиме студента</f:facet>
+                    <p:outputLabel value="#{rukPrijava.imePrezime(item.idStudent)}"/>
+                </p:column>
+                  <p:column style="text-align: center">
+                    <f:facet name="header">Статус пријаве</f:facet>
+                    <p:outputLabel value="#{rukPrijava.statusPrijave(item.imaGreske)}"/>
+                </p:column>
+                <p:column style="text-align: center">
+                    <p:commandLink value="Ажурирајте пријаву" action="#{rukPrijava.pregled1(item)}" disabled="#{login.sprecen or (item.imaGreske eq 0 and item.prijavljena eq 1) or item.idRad eq 0}"/>
+                </p:column>
+                <p:column style="text-align: center">
+                    <p:commandLink value="Прегледајте верзије пријаве" action="#{rukPrijava.pregVer1(item)}" disabled="#{login.sprecen}"/>
+                </p:column>
+                <p:column style="text-align: center">
+                    <f:facet name="header">Изаберите запосленог у студентској служби</f:facet>
+                    <p:selectOneMenu style="width:50%;" value="#{rukPrijava.zaposleniSluzba}" disabled="#{login.sprecen or rukPrijava.stani1(item) or item.idRad eq 0}">
+                            <f:selectItems value="#{login.listaOsobaSluzbe}" />
+                    </p:selectOneMenu>
+                </p:column>
+                <p:column style="text-align: center">
+                    <p:commandLink value="Пошаљите Студентској служби" action="#{rukPrijava.posalji1(item)}" disabled="#{login.sprecen or rukPrijava.stani1(item) or item.idRad eq 0}"/>
+                </p:column>
+                 <p:column style="text-align: center">
+                    <p:commandLink value="Погледајте добијене коментаре од стране Студентске службе" action="#{rukPrijava.pregledKomentara1(item)}" disabled="#{login.sprecen}"/>
+                </p:column>
+            </p:dataTable>
+            </div>
+               </h:form>
+                 </p:tab>
+            <p:tab title="Руководилац" disabled="#{login.sprecen}">
+                <h:form>
+            <div align="center">
+                <h:outputText value="Списак захтева од стране професора"  style="font-size:40px; font-weight: 200; font-style: italic;"/><br/><br/>
+                <p:dataTable value="#{listaPrijavaMentoraZaRuk}" var="item" style="width:100%; border:1px solid black; border-collapse: collapse; font-size: 15px;">
+                <p:column style="text-align: center">
+                    <f:facet name="header">Редни број захтева</f:facet>
+                    <p:outputLabel value="#{item.idMentToRuk}"/>
+                </p:column>
+                <p:column style="text-align: center">
+                    <f:facet name="header">Име и презиме професора</f:facet>
+                    <p:outputLabel value="#{rukPrijava.imePrezime(item.idMentor)}"/>
+                </p:column>
+                <p:column style="text-align: center">
+                    <f:facet name="header">Статус пријаве</f:facet>
+                    <p:outputLabel value="#{rukPrijava.statusPrijave1(item)}"/>
+                </p:column>
+                <p:column style="text-align: center">
+                    <p:commandLink value="Ажурирајте захтев" action="#{rukPrijava.pregled(item)}" disabled="#{login.sprecen or rukPrijava.stani2(item) or rukPrijava.pro1(item)}"/>
+                </p:column>
+                <p:column style="text-align: center">
+                    <p:commandLink value="Прегледајте верзије пријаве" action="#{rukPrijava.pregVer2(item)}" disabled="#{login.sprecen}"/>
+                </p:column>    
+                <p:column style="text-align: center">
+                    <f:facet name="header">Изаберите запосленог у студентској служби</f:facet>
+                    <p:selectOneMenu style="width:50%;" value="#{rukPrijava.zaposleniSluzba}" disabled="#{login.sprecen or rukPrijava.stani2(item) or rukPrijava.pro1(item)}">
+                            <f:selectItems value="#{login.listaOsobaSluzbe}" />
+                    </p:selectOneMenu>
+                </p:column>
+                <p:column style="text-align: center">
+                    <p:commandLink value="Пошаљите Студентској служби" action="#{rukPrijava.posalji(item)}" disabled="#{login.sprecen or rukPrijava.stani2(item) or rukPrijava.pro1(item)}"/>
+                </p:column>
+            </p:dataTable>
+            </div>
+                    </h:form>
+            </p:tab>
+                 <p:tab title="Професор">
+                     <h:form>
+            <div align="center">
+                <h:outputText value="Списак пријава мастер тема студената"  style="font-size:40px; font-weight: 200; font-style: italic;"/><br/><br/>
+             <p:dataTable value="#{login.listaPrijavaZaMentora2}" var="item" style="width:100%; border:1px solid black; border-collapse: collapse; font-size: 15px;">
+                <p:column style="text-align: center">
+                    <f:facet name="header">Редни број пријаве</f:facet>
+                    <p:outputLabel value="#{item.idPrijava}"/>
+                </p:column>
+                <p:column style="text-align: center">
+                    <f:facet name="header">Име и презиме студента</f:facet>
+                    <p:outputLabel value="#{rukPrijava.imePrezime(item.idStudent)}"/>
+                </p:column>
+                 <p:column style="text-align: center">
+                    <f:facet name="header">Статус пријаве</f:facet>
+                    <p:outputLabel value="#{rukPrijava.statusPrijaveProf(item.imaGreske)}"/>
+                </p:column>
+                <p:column style="text-align: center">
+                    <p:commandLink value="Ажурирајте пријаву" action="#{rukPrijava.pregledProf(item)}" disabled="#{item.prijavljena eq 1 or item.idRad eq 0}"/>
+                </p:column>
+                 <p:column style="text-align: center">
+                    <p:commandLink value="Прегледајте верзије пријаве" action="#{rukPrijava.pregVer3(item)}"/>
+                </p:column>
+                <p:column style="text-align: center">
+                    <p:commandLink value="Пошаљите руководиоцу модула" action="#{rukPrijava.posaljiProf(item)}" disabled="#{item.prijavljena eq 1 or item.imaGreske eq 2 or item.imaGreske eq 3 or item.idRad eq 0}"/>
+                </p:column>
+                 <p:column style="text-align: center">
+                    <p:commandLink value="Погледајте добијене коментаре од стране руководиоца модула" action="#{rukPrijava.pregledKomentaraProf(item)}"/>
+                </p:column>
+                <p:column style="text-align: center">
+                    <p:commandLink value="Погледајте добијене коментаре од стране Студентске службе" action="#{rukPrijava.pregledKomentara1(item)}"/>
+                </p:column>
+            </p:dataTable>
+            </div>
+            </h:form>
+               </p:tab>
+                 <p:tab title="Подесите статус о Вашем раду">
+                     <h:form>
+            <div align="center">
+               <h:outputText value="Изаберите заменика:" style="font-size:20px;"/>
+               <span style="display: inline-block; margin-left: 20px;"/>
+               <h:selectOneMenu style="width:20%;" value="#{login.ipZamenik}" disabled="#{login.sprecen}">
+                            <f:selectItems value="#{login.listZamenika}" />
+                </h:selectOneMenu>
+                <br/>
+                <br/>
+                <h:commandButton value="Спречите Ваш рад" action="#{login.spreci()}" style="display: inline-block; font-size: 25px; border-radius: 25pt 25pt; border-style: double; border-width: 2px;" disabled="#{login.sprecen}"/>
+                <span style="display: inline-block; margin-left: 40px;"/>
+                <h:commandButton value="Наставите Ваш рад" action="#{login.nastavi()}" style="display: inline-block; font-size: 25px; border-radius: 25pt 25pt; border-style: double; border-width: 2px;" disabled="#{not login.sprecen}"/>
+                
+            </div>
+                         </h:form>
+                     </p:tab>
+                 </p:tabView>
+           
+            <br/>
+            
+       <div id="vrh" width="100%" height="50%" style="background-image: url(background-solid-line-cell-wallpaper-preview.jpg); border-bottom: 3px solid beige; padding-top:5px; position:relative; bottom:-5px; left:0; padding-bottom: 20px;">
+             <h:form>
+           <div align="center" style="padding-top: 5px">
+                <h:commandButton value="Одјавите се" action="#{login.odjava()}" style="display: inline-block; font-size: 25px; border-radius: 25pt 25pt; border-style: double; border-width: 2px;"/>
+             </div>
+       </h:form>
+       </div>
+      </h:body>
+</html>
+

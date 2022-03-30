@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 12, 2021 10:31:11 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="beans.Masterrad" table="masterrad" catalog="master" optimistic-lock="version">
+        <id name="idRad" type="java.lang.Integer">
+            <column name="IdRad" />
+            <generator class="identity" />
+        </id>
+        <property name="nazivS" type="string">
+            <column name="NazivS" length="100" not-null="true" />
+        </property>
+        <property name="nazivE" type="string">
+            <column name="NazivE" length="100" not-null="true" />
+        </property>
+        <property name="predmet" type="string">
+            <column name="Predmet" length="1000" />
+        </property>
+        <property name="sadrzaj" type="string">
+            <column name="Sadrzaj" length="1000" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 12, 2021 10:31:11 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="beans.Ruktosluzba" table="ruktosluzba" catalog="master" optimistic-lock="version">
+        <id name="idRukToSluzba" type="java.lang.Integer">
+            <column name="IdRukToSluzba" />
+            <generator class="identity" />
+        </id>
+        <property name="idMentToRuk" type="int">
+            <column name="IdMentToRuk" not-null="true" />
+        </property>
+        <property name="idRuk" type="string">
+            <column name="IdRuk" length="32" not-null="true" />
+        </property>
+        <property name="idSluzba" type="string">
+            <column name="IdSluzba" length="32" not-null="true" />
+        </property>
+        <property name="status" type="java.lang.Integer">
+            <column name="Status" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 12, 2021 10:31:11 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="beans.Predaje" table="predaje" catalog="master" optimistic-lock="version">
+        <id name="idPredaje" type="java.lang.Integer">
+            <column name="IdPredaje" />
+            <generator class="identity" />
+        </id>
+        <property name="idMentor" type="string">
+            <column name="IdMentor" length="32" not-null="true" />
+        </property>
+        <property name="idStudent" type="string">
+            <column name="IdStudent" length="32" not-null="true" />
+        </property>
+        <property name="idPredmet" type="int">
+            <column name="IdPredmet" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

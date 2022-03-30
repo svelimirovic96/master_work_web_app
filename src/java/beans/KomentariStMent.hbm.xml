@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 12, 2021 10:31:11 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="beans.KomentariStMent" table="komentari_st_ment" catalog="master" optimistic-lock="version">
+        <id name="idKomentar" type="java.lang.Integer">
+            <column name="IdKomentar" />
+            <generator class="identity" />
+        </id>
+        <property name="idPrijava" type="int">
+            <column name="IdPrijava" not-null="true" />
+        </property>
+        <property name="idStudent" type="string">
+            <column name="IdStudent" length="32" not-null="true" />
+        </property>
+        <property name="idMentor" type="string">
+            <column name="IdMentor" length="32" not-null="true" />
+        </property>
+        <property name="komentar" type="string">
+            <column name="Komentar" length="100" />
+        </property>
+    </class>
+</hibernate-mapping>

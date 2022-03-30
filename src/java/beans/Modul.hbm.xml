@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 12, 2021 10:31:11 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="beans.Modul" table="modul" catalog="master" optimistic-lock="version">
+        <id name="idModul" type="int">
+            <column name="IdModul" />
+            <generator class="assigned" />
+        </id>
+        <property name="naziv" type="string">
+            <column name="Naziv" length="50" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

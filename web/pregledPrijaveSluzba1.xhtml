@@ -1,0 +1,440 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+       <title>Систем за пријаву мастер радова</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link href="pocetna.css" rel="stylesheet" type="text/css" />
+    </h:head>
+   
+    <h:body>
+    <ui:include src="./header.xhtml"/>
+        <div id="top">
+        <br/><br/><h:outputLabel style="border-bottom: 1px solid black; border-width: 3px; font-weight: bold; font-style: italic; font-size: 40px;">
+            Преглед пријаве теме за израду мастер рада</h:outputLabel>
+        <br/>
+        <br/>
+        </div>
+    <p:tabView>
+        <p:tab title="Формулар пријаве теме">
+            <h:form>
+            <table align="center" cellpadding="10" cellspacing="1" style="width:1203px; border:1px solid black; border-collapse: collapse">
+              <tr>
+                    <td style="border:1px solid black">
+                        <p style="margin: 1px 5px; margin-right: 5em">Име и презиме студента:</p>
+                    </td>
+                    <td style="border:1px solid black">
+                        <h:inputText size="100" id="name" required="true" readonly="true" requiredMessage="Унесите Ваше име и презиме!" value="#{sluzbaPrijava.ipStudent}"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="border:1px solid black">
+                        <p style="margin: 1px 5px; margin-right: 5em">Број индекса:</p>
+                    </td>
+                    <td style="border:1px solid black">
+                        <h:inputText size="100" id="indeks" readonly="true" requiredMessage="Унесите Ваш број индекса!" required="true" value="#{sluzbaPrijava.indexStudent}" />
+                    </td>
+                </tr>
+                <tr>
+                    <td style="border:1px solid black">
+                         <p style="margin: 1px 5px; margin-right: 5em">Изборно подручје мастер студија:</p>
+                    </td>
+                    <td style="border:1px solid black">
+                        <h:inputText size="100" value="#{sluzbaPrijava.nazivModula}" id="modul" readonly="true" requiredMessage="Унесите Ваше изборно подручје!" required="true" />
+                    </td>
+                </tr>
+                 <tr>
+                    <td style="border:1px solid black">
+                          <p style="margin: 1px 5px; margin-right: 5em">Име и презиме руководиоца рада:</p>
+                    </td>
+                    <td style="border:1px solid black">
+                        <h:inputText size="100" value="#{sluzbaPrijava.ipMentor}" id="mentor" readonly="true" requiredMessage="Унесите име и презиме руководиоца рада!" required="true" />
+                     </td>
+                </tr>
+                <tr>
+                    <td style="border:1px solid black">
+                        <h:selectBooleanCheckbox value="#{sluzbaPrijava.rukovodilac}" readonly="true" disabled="true"/>
+                    </td>
+                    <td style="border:1px solid black">
+                         <p style="margin: 1px 5px">Руководилац рада је ангажован на изборном подручју мастер студија</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="border:1px solid black">
+                       <h:selectBooleanCheckbox value="#{sluzbaPrijava.mentorRada}" readonly="true" disabled="true"/>
+                    </td>
+                    <td style="border:1px solid black;">
+                        <p style="margin: 1px 5px; float:left;">Руководилац рада није ангажован на изборном подручју мастер студија али је кандидат код њега положио предмет:</p>
+                        <h:inputText size="50" style="float:left" id="predmet" value="#{sluzbaPrijava.nazivPredmeta}" readonly="true"/>
+                        
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="border:1px solid black">
+                        <p style="margin: 1px 5px; margin-right: 10em">Наслов мастер рада на српском језику (написан ћирилицом):</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="border:1px solid black">
+                        <h:inputTextarea rows="2" style="width:100%" id="s_naslov" value="#{sluzbaPrijava.nazivRadSer}" required="false" requiredMessage="Напишите наслов мастер рада на српском језику!">
+                        </h:inputTextarea>
+                        <rich:message for="s_naslov" ajaxRendered="true"></rich:message>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="border:1px solid black">
+                        <h:inputTextarea rows="2" style="width:100%; background-color:window; color: red; " required="false" requiredMessage="Унесите коментар!" value="#{sluzbaPrijava.komSer}">
+                        <f:passThroughAttribute name="placeholder" value="Унесите коментар за наслов рада на српском језику"/>
+                        </h:inputTextarea>
+                    </td>
+                   
+                </tr>
+                <tr>
+                    <td colspan="2" style="border:1px solid black">
+                         <p style="margin: 1px 5px; margin-right: 10em">Наслов мастер рада на енглеском језику:</p>
+                    </td>
+                </tr>
+                 <tr>
+                    <td colspan="2" style="border:1px solid black">
+                        <h:inputTextarea rows="2" style="width:100%" id="e_naslov" required="false" value="#{sluzbaPrijava.nazivRadEn}" requiredMessage="Напишите наслов мастер рада на енглеском језику!">
+                        </h:inputTextarea>
+                        <rich:message for="e_naslov" ajaxRendered="true"></rich:message>
+                    </td>
+                 </tr>
+                <tr>
+                      <td colspan="2" style="border:1px solid black">
+                        <h:inputTextarea rows="2" style="width:100%; background-color:window; color: red;" required="false" requiredMessage="Унесите коментар!" value="#{sluzbaPrijava.komEn}">
+                        <f:passThroughAttribute name="placeholder" value="Унесите коментар за наслов рада на енглеском језику"/>
+                        </h:inputTextarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="border:1px solid black">
+                        <p style="margin: 1px 5px; margin-right: 10em">Предлог Комисије за преглед и оцену</p>
+                    </td>
+                </tr>
+                 <tr>
+                    <td colspan="2" style="border:1px solid black;">
+                        <p style="margin: 1px 5px; float:left;">1. Руководилац рада</p>
+                        <h:inputText size="60" id="kom_mentor" style="float:left" required="false" readonly="true" value="#{sluzbaPrijava.ipMentor}">
+                            <f:passThroughAttribute name="placeholder" value="Унесите 1. члана Комисије"/>
+                        </h:inputText>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="border:1px solid black">
+                        <p style="margin: 1px 5px; float:left;">2. </p>
+                        <h:inputText size="60" style="float:left" readonly="true" required="false" value="#{sluzbaPrijava.ipKomisija1}">
+                            <f:passThroughAttribute name="placeholder" value="Унесите 2. члана Комисије"/>
+                        </h:inputText>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="border:1px solid black">
+                        <p style="margin: 1px 5px; float:left">3. </p>
+                        <h:inputText size="60" style="float:left" readonly="true" required="false" value="#{sluzbaPrijava.ipKomisija2}">
+                            <f:passThroughAttribute name="placeholder" value="Унесите 3. члана Комисије"/>
+                        </h:inputText>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="border:1px solid black">
+                        <p style="margin: 1px 5px; float:left">У Београду </p>
+                        <h:inputText size="20" style="float:left;" id="datum" readonly="true" required="false" requiredMessage="Унесите датум!" value="#{sluzbaPrijava.datum1}">
+                             <f:passThroughAttribute name="placeholder" value="Унесите датум"/>
+                        </h:inputText>
+                        <p style="margin: 1px 5px; float:left">године </p>
+                        <rich:message for="datum" ajaxRendered="true"></rich:message>
+                    </td>
+                </tr>
+            </table>
+            <table align="center" cellpadding="10" cellspacing="1" style="border:1px solid black; border-top-style: none; border-collapse: collapse">
+              <tr>
+                    <td align="center" style="border:1px solid black;  border-top-style: none;">
+                        <p  style="margin: 1px 5px">Кандидат</p>
+                    </td>
+                    <td align="center" style="border:1px solid black;  border-top-style: none;">
+                        <p  style="margin: 1px 5px">Руководилац рада</p>
+                    </td>
+                    <td align="center"  style="border:1px solid black; border-top-style: none; ">
+                        <p  style="margin: 1px 5px">Руководилац изборног подручја</p> 
+                    </td>
+                </tr>
+                <tr>
+                    <td  align="center" style="border:1px solid black">
+                        <h:inputText size="44" id="kandidat" readonly="true" required="true" requiredMessage="Унесите кандидата!" value="#{sluzbaPrijava.ipStudent}">
+                          </h:inputText>  
+                    </td>
+                    <td  align="center" style="border:1px solid black">
+                        <h:inputText size="44" value="#{sluzbaPrijava.ipMentor}" id="mentor1" readonly="true" required="true" requiredMessage="Унесите руководиоца рада!">
+                        </h:inputText>  
+
+                    </td>
+                    <td  align="center" style="border:1px solid black">
+                        <h:inputText size="44" id="ruk_podr" value="#{sluzbaPrijava.ipRuk}" readonly="true" required="true" requiredMessage="Унесите руководиоца изборног подручја!">
+                        </h:inputText>
+                    </td>
+                </tr>
+            </table>
+            <div style="margin-top: 20px; margin-left: 70px;">  
+        <h:outputLabel style="font-weight: bold">ПРИЛОЗИ
+        </h:outputLabel>
+        <br/><h:outputLabel>
+            -образложење теме (са потписима предложеног Руководиоца израде рада и кандидата)
+        </h:outputLabel>
+        <br/><h:outputLabel>
+                -биографски подаци кандидата (са потписом кандидата)
+            </h:outputLabel>
+        <br/>
+        </div>
+        
+        <table align="center" cellpadding="10" cellspacing="1" style="width:1203px; border:1px solid black; border-collapse: collapse; margin-top: 20px">
+                <tr>
+                    <td colspan="2" style="border:1px solid black;">
+                        <h:outputLabel style="font-weight: bold; font-style: italic">ЗАКЉУЧАК  КОМИСИЈЕ ЗА СТУДИЈЕ  II СТЕПЕНА</h:outputLabel>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="border:1px solid black;">
+                        <h:selectBooleanCheckbox value="#{sluzbaPrijava.prihvata}" readonly="true" disabled="true"/>
+                    
+                    </td>
+                    <td  style="border:1px solid black;">
+                        <p style="margin: 1px 5px;">Прихвата се</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td  style="border:1px solid black;">
+                        <h:selectBooleanCheckbox value="#{sluzbaPrijava.odbija}" readonly="true" disabled="true"/>
+                    
+                    </td>
+                    <td  style="border:1px solid black;">
+                        <p style="margin: 1px 5px;">Одбија се</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td  style="border:1px solid black;">
+                        <h:selectBooleanCheckbox value="#{sluzbaPrijava.sugerisi}" readonly="true" disabled="true"/>
+                    
+                    </td>
+                    <td  style="border:1px solid black;">
+                        <p style="margin: 1px 5px;">Прихвата се уз сугестије</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="border:1px solid black;">
+                        <h:outputLabel>Образложење и сугестије</h:outputLabel>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="border:1px solid black;">
+                        <h:inputTextarea style="height: 100px; width:100%" value="#{sluzbaPrijava.sugestija}" disabled="true">
+                        </h:inputTextarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="27%" style="border:1px solid black;">
+                        <p style="margin: 1px 5px; float:left">У Београду </p>
+                        <h:inputText size="20" style="float:left;" value="#{sluzbaPrijava.datum2}" disabled="true">
+                             <f:passThroughAttribute name="placeholder" value="Унесите датум"/>
+                        </h:inputText><p style="margin: 1px 5px; float:left">године </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="border:1px solid black;">
+                        <p style="margin: 1px 5px;">Председник Комисије</p>
+                    </td>
+                </tr>
+            </table>
+                <div align="center" style="padding-top: 20px">
+                <h:commandButton value="Измените податке о пријави" action="#{sluzbaPrijava.izmeni1Zam()}" style="display:block; font-size: 20px;"/>
+                <h:commandButton value="Пошаљите коментаре студенту" action="#{sluzbaPrijava.komentarisi1Z()}" style="display:block; font-size: 20px;"/>
+                <h:commandButton value="Пошаљите коментаре руководиоцу рада" action="#{sluzbaPrijava.komentarisi1Zam()}" style="display:block; font-size: 20px;"/>
+                
+                </div>
+                <div align="left">
+                 <h:outputText value="" id="pregled1" binding="#{sluzbaPrijava.messagePregled1}"/>
+                 <rich:message for="pregled1" ajaxRendered="true"></rich:message>
+                <br/>
+                 <h:outputText value="" id="pregled2" binding="#{sluzbaPrijava.messagePregled2}"/>
+                 <rich:message for="pregled2" ajaxRendered="true"></rich:message>
+                 <br/>
+                 <h:outputText value="" id="pregled10" binding="#{sluzbaPrijava.messagePregled10}"/>
+                 <rich:message for="pregled10" ajaxRendered="true"></rich:message>
+                   </div>
+            </h:form>
+        </p:tab>
+        <p:tab title="Биографија студента">
+            <h:form>
+           <div align="center" style="padding-top: 40px">
+            <h:inputTextarea rows="10" value="#{sluzbaPrijava.bioText}" style="width:75%; font-size: 20px;" id="bio" required="true" requiredMessage="Морате попунити Вашу биографију!"/>
+             <rich:message for="bio" ajaxRendered="true"></rich:message>
+           <br/>
+           <br/>
+            <h:inputTextarea rows="10" style="width:75%; background-color:window; color: red;" required="false" requiredMessage="Унесите коментар!" value="#{sluzbaPrijava.komBio}">
+                        <f:passThroughAttribute name="placeholder" value="Унесите коментар за биографију студента"/>
+            </h:inputTextarea>
+           </div>
+        <br/>
+        <br/>
+        <div align="left" style="padding-top: 40px; padding-left: 900px;">
+           <h:outputLabel style="font-size: 12px;">
+            (потпис студента)</h:outputLabel>
+            <br/>_______________________________<br/>
+            <h:outputLabel style="font-size: 12px;">
+                Дипл.инж. Име Презиме</h:outputLabel>
+                   
+        </div>
+        <div align="center" style="padding-top: 20px">
+        <h:commandButton value="Измените податке о пријави" style="display:block; font-size: 20px;" action="#{sluzbaPrijava.izmeni2Zam()}"/>
+        <h:commandButton value="Пошаљите коментаре студенту" style="display:block; font-size: 20px;" action="#{sluzbaPrijava.komentarisi2Z()}"/>
+        <h:commandButton value="Пошаљите коментаре руководиоцу рада" action="#{sluzbaPrijava.komentarisi2Zam()}" style="display:block; font-size: 20px;"/>
+                
+        </div>
+        <div align="left">
+                 <h:outputText value="" id="pregled3" binding="#{sluzbaPrijava.messagePregled3}"/>
+                 <rich:message for="pregled3" ajaxRendered="true"></rich:message>
+        </div>
+        </h:form>
+        </p:tab>
+        <p:tab title="Образложење теме мастер рада">
+          <h:form>
+            <div style="padding: 30px">
+            <div>
+            <h:outputLabel style="font-weight: bold;">
+                Кандидат </h:outputLabel><h:inputText id="kandidat1" readonly="true" style="width:92%" value="#{sluzbaPrijava.ipStudent}" required="true" requiredMessage="Унесите Ваше име и презиме!">
+            </h:inputText>
+            </div>
+            <br/>
+            <div>
+            <h:outputLabel style="font-weight: bold;">
+                Број индекса </h:outputLabel><h:inputText readonly="true" id="indeks1" value="#{sluzbaPrijava.indexStudent}" style="width:25%" required="true" requiredMessage="Унесите Ваш број индекса!">
+                </h:inputText>
+            <h:outputLabel style="font-weight: bold;">
+                Модул </h:outputLabel> <h:inputText size="87" value="#{sluzbaPrijava.nazivModula}" id="modul1" readonly="true" requiredMessage="Унесите Ваше изборно подручје!" required="true">
+                </h:inputText>
+            </div>
+            <br/>
+        </div>
+         <div id="top">
+        <h:outputLabel style="font-weight: bold; font-size: 20px;">
+            КОМИСИЈИ ЗА СТУДИЈЕ II СТЕПЕНА АКАДЕМСКИХ СТУДИЈА
+        </h:outputLabel>
+        </div>
+        <div style="padding: 30px">
+            <div>
+            <h:outputLabel style="font-weight: bold;">Предмет:</h:outputLabel>
+            </div>
+            <br/>
+            <div>
+                <h:outputLabel><span style="display: inline-block; margin-left: 40px;"></span>Пријава теме за израду мастер рада под насловом "</h:outputLabel>
+                <h:inputText id="tema" value="#{sluzbaPrijava.nazivRadSer}" readonly="true" size="90" required="true" requiredMessage="Унесите наслов теме!">
+                    <f:passThroughAttribute name="placeholder" value="Унесите наслов теме"/>
+                </h:inputText>
+                <h:outputLabel>"</h:outputLabel>
+                <rich:message for="tema" ajaxRendered="true"/>
+            </div>
+            <br/>
+            <div>
+                <h:outputLabel style="font-weight: bold;">Област мастер рада:</h:outputLabel>
+            </div>
+            <br/>
+            <div>
+                <h:outputLabel><span style="display: inline-block; margin-left: 40px;"></span>Наведена тема мастер рада припада области </h:outputLabel>
+              <h:inputText id="oblast" size="97" value="#{sluzbaPrijava.nazivPredmeta}" readonly="true" required="true" requiredMessage="Унесите област којој Ваша тема припада!">
+                    <f:passThroughAttribute name="placeholder" value="Унесите назив области"/>
+                </h:inputText>
+            </div>
+            <br/>
+            <div>
+                <h:outputLabel style="font-weight: bold;">Предмет, циљ и методе мастер рада:</h:outputLabel>
+            </div>
+            <br/>
+            <div>
+                <h:inputTextarea value="#{sluzbaPrijava.radPredmet}" rows="4" style="width:100%" id="dok_1" required="true" requiredMessage="Напишите предмет, циљ и методе мастер рада!">
+                    <f:passThroughAttribute name="placeholder" value="Предмет, циљ и методе мастер рада"/>
+                </h:inputTextarea>
+                <rich:message for="dok_1" ajaxRendered="true"/>
+                <br/><br/>
+                 <h:inputTextarea rows="2" style="width:100%; background-color:window; color: red;" required="false" requiredMessage="Унесите коментар!" value="#{sluzbaPrijava.komPredmet}">
+                        <f:passThroughAttribute name="placeholder" value="Унесите коментар за предмет, циљ и методе мастер рада"/>
+                        </h:inputTextarea>
+            </div>
+            <br/>
+            <div>
+                <h:outputLabel style="font-weight: bold;">Садржај и очекивани резултати мастер рада:</h:outputLabel>
+            </div>
+            <br/>
+            <div>
+                <h:inputTextarea value="#{sluzbaPrijava.radSadrzaj}" rows="4" style="width:100%" id="dok_2" required="true" requiredMessage="Напишите садржај и очекиване резултате мастер рада!">
+                    <f:passThroughAttribute name="placeholder" value="Садржај и очекивани резултати мастер рада"/>
+                </h:inputTextarea>
+                <rich:message for="dok_2" ajaxRendered="true"/><br/><br/>
+                 <h:inputTextarea rows="2" style="width:100%; background-color:window; color: red;" required="false" requiredMessage="Унесите коментар!" value="#{sluzbaPrijava.komSadrzaj}">
+                        <f:passThroughAttribute name="placeholder" value="Унесите коментар за садржај и очекиване резултате мастер рада"/>
+                        </h:inputTextarea>
+            </div>
+            <br/>
+        </div>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+        <div style="padding: 30px">
+            <div align="left">
+                <h:outputLabel style="font-weight: bold;">Предложени ментор:</h:outputLabel>
+            </div>
+            <div align="right">
+                <h:outputLabel style="font-weight: bold;">Кандидат:</h:outputLabel>
+            </div>
+            <div align="left">
+                <h:outputLabel>(потпис ментора)</h:outputLabel>
+            </div>
+            <div align="right">
+                <h:outputLabel>(потпис студента)</h:outputLabel>
+            </div>
+            <div align="left">
+                _______________________________
+            </div>
+            <div align="right">
+                _______________________________
+            </div>
+            <div align="left">
+                <h:outputLabel>Др Име Презиме, звање</h:outputLabel>
+            </div>
+            <div align="right">
+                <h:outputLabel>Дипл. инж. Име Презиме</h:outputLabel>
+            </div>
+            <br/>
+        </div>
+        <div align="center" style="padding-top: 20px">
+            <h:commandButton value="Измените податке о пријави" style="display:block; font-size: 20px;" action="#{sluzbaPrijava.izmeni3Zam()}"/>
+            <h:commandButton value="Пошаљите коментаре студенту" style="display:block; font-size: 20px;"  action="#{sluzbaPrijava.komentarisi3Z()}"/>
+            <h:commandButton value="Пошаљите коментаре руководиоцу рада" action="#{sluzbaPrijava.komentarisi3Zam()}" style="display:block; font-size: 20px;"/>
+                
+        </div>
+        <div align="left">
+                 <h:outputText value="" id="pregled4" binding="#{sluzbaPrijava.messagePregled4}"/>
+                 <rich:message for="pregled4" ajaxRendered="true"></rich:message>
+                  <h:outputText value="" id="pregled5" binding="#{sluzbaPrijava.messagePregled5}"/>
+                 <rich:message for="pregled5" ajaxRendered="true"></rich:message>
+        </div>
+          </h:form>
+        </p:tab>
+    </p:tabView>
+    <br/>
+    
+    <div id="vrh" width="100%" height="50%" style="background-image: url(background-solid-line-cell-wallpaper-preview.jpg); border-bottom: 3px solid beige; padding-top:5px; position:relative; bottom:-5px; left:0; padding-bottom: 20px;">
+                 <h:form>
+    <div align="center" style="padding-top: 5px">
+        <h:commandButton value="Назад" action="sluzba_pocetna" style="display:block; font-size: 25px; border-radius: 25pt 25pt; border-style: double; border-width: 2px;"/>
+    </div>
+    </h:form>
+    </div>
+    </h:body>
+</html>

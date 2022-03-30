@@ -1,0 +1,178 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+     <h:head>
+        <title>Систем за пријаву мастер радова</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link href="pocetna.css" rel="stylesheet" type="text/css" />
+    </h:head>
+    <h:body>
+        <ui:include src="./header.xhtml"/>
+         <div align="left">
+         <h:outputText value="Студентска служба" style="font-size:30px; color: lightgray"/><br/>
+         <h:outputText value="#{login.ime} #{login.prezime}" style="font-size:30px; color: lightgray"/>
+         </div>
+        <br/>
+         <div align="left">
+                 <h:outputText value="" id="sas1" binding="#{sluzbaPrijava.messageUlaz}"/>
+                 <rich:message for="sas1" ajaxRendered="true"></rich:message><br/>
+         </div><br/>
+        <p:tabView>
+            <p:tab title="Захтеви руководилаца свих модула">
+        <h:form>
+            <div align="center">
+                <h:outputText value="Списак захтева од стране руководилаца свих модула"  style="font-style: italic; font-size:40px; font-weight: 200;"/><br/><br/>
+                <p:dataTable value="#{login.listaZahtevaSluzbi}" var="item" style="width:100%; border:1px solid black; border-collapse: collapse; font-size: 10px;">
+                <p:column style="text-align: center">
+                    <f:facet name="header">Редни број захтева</f:facet>
+                    <p:outputLabel value="#{item.idRukToSluzba}"/>
+                </p:column>
+                <p:column style="text-align: center">
+                    <f:facet name="header">Руководилац модула</f:facet>
+                    <p:outputLabel value="#{sluzbaPrijava.ruk(item)}"/>
+                </p:column>
+                <p:column style="text-align: center">
+                    <f:facet name="header">Модул</f:facet>
+                    <p:outputLabel value="#{sluzbaPrijava.modul(item)}"/>
+                </p:column>
+                <p:column style="text-align: center">
+                    <f:facet name="header">Руководилац рада</f:facet>
+                    <p:outputLabel value="#{sluzbaPrijava.mentor(item)}"/>
+                </p:column>
+                <p:column style="text-align: center">
+                    <f:facet name="header">Студент</f:facet>
+                    <p:outputLabel value="#{sluzbaPrijava.student(item)}"/>
+                </p:column>
+                     <p:column style="text-align: center">
+                    <f:facet name="header">Статус пријаве</f:facet>
+                    <p:outputLabel value="#{sluzbaPrijava.status(item)}"/>
+                </p:column>
+                <p:column style="text-align: center">
+                    <p:commandLink value="Ажурирајте пријаву студента" action="#{sluzbaPrijava.azuriraj(item)}" ajax="false" update="sas1" disabled="#{sluzbaPrijava.ponisti(item)  or sluzbaPrijava.pro(item)}"/>
+                </p:column>
+               
+                <p:column style="text-align: center">
+                    <p:commandLink value="Прегледајте верзије пријаве" action="#{sluzbaPrijava.pregVer1(item)}"/>
+                </p:column>
+                    
+                <p:column style="text-align: center">
+                    <p:commandLink value="Одржите састанак" action="#{sluzbaPrijava.odr1(item)}" disabled="#{sluzbaPrijava.ponisti(item) or sluzbaPrijava.pro(item)}" ajax="false" update="sas1"/>
+                </p:column>
+                <p:column style="text-align: center">
+                        <p:commandLink value="Потврдити пријаву студента" action="#{sluzbaPrijava.potvrdi(item)}" ajax="false" update="sas1" disabled="#{sluzbaPrijava.ponisti(item)  or sluzbaPrijava.pro(item)}"/>
+                </p:column>
+                <p:column style="text-align: center">
+                    <p:commandLink value="Обриши тему" action="#{sluzbaPrijava.obrisi(item)}" ajax="false" update="sas1"/><br/>
+                    <p:commandLink value="Врати тему" action="#{sluzbaPrijava.vrati(item)}" ajax="false" update="sas1"/>
+                </p:column>
+            </p:dataTable>
+            </div>
+            </h:form>
+                </p:tab>
+            <p:tab title="Захтеви заменика руководилаца свих модула">
+                <h:form>
+            <div align="center">
+                <h:outputText value="Списак захтева од стране заменика руководилаца свих модула"  style="font-style: italic; font-size:40px; font-weight: 200;"/><br/><br/>
+                <p:dataTable value="#{login.listaZahtevaSluzbi1}" var="item" style="width:100%; border:1px solid black; border-collapse: collapse; font-size: 10px;">
+                <p:column style="text-align: center">
+                    <f:facet name="header">Редни број захтева</f:facet>
+                    <p:outputLabel value="#{item.idZamToSluzba}"/>
+                </p:column>
+                <p:column style="text-align: center">
+                    <f:facet name="header">Заменик</f:facet>
+                    <p:outputLabel value="#{sluzbaPrijava.zam(item)}"/>
+                </p:column>
+                <p:column style="text-align: center">
+                    <f:facet name="header">Руководилац модула</f:facet>
+                    <p:outputLabel value="#{sluzbaPrijava.ruk1(item)}"/>
+                </p:column>
+                <p:column style="text-align: center">
+                    <f:facet name="header">Модул</f:facet>
+                    <p:outputLabel value="#{sluzbaPrijava.modul1(item)}"/>
+                </p:column>
+                <p:column style="text-align: center">
+                    <f:facet name="header">Руководилац рада</f:facet>
+                    <p:outputLabel value="#{sluzbaPrijava.mentor1(item)}"/>
+                </p:column>
+                <p:column style="text-align: center">
+                    <f:facet name="header">Студент</f:facet>
+                    <p:outputLabel value="#{sluzbaPrijava.student1(item)}"/>
+                </p:column>
+                    <p:column style="text-align: center">
+                    <f:facet name="header">Статус пријаве</f:facet>
+                    <p:outputLabel value="#{sluzbaPrijava.status1(item)}"/>
+                </p:column>
+                <p:column style="text-align: center">
+                    <p:commandLink value="Ажурирајте пријаву студента" action="#{sluzbaPrijava.azuriraj1(item)}" ajax="false" update="sas1" disabled="#{sluzbaPrijava.ponisti1(item)  or sluzbaPrijava.pro1(item)}"/>
+                </p:column>
+                    
+                <p:column style="text-align: center">
+                    <p:commandLink value="Прегледајте верзије пријаве" action="#{sluzbaPrijava.pregVer2(item)}"/>
+                </p:column>
+                <p:column style="text-align: center">
+                    <p:commandLink value="Одржите састанак" action="#{sluzbaPrijava.odr2(item)}" disabled="#{sluzbaPrijava.ponisti1(item) or sluzbaPrijava.pro1(item)}" ajax="false" update="sas1"/>
+                </p:column>
+                    <p:column style="text-align: center">
+                        <p:commandLink value="Потврдити пријаву студента" action="#{sluzbaPrijava.potvrdi1(item)}" ajax="false" update="sas1" disabled="#{sluzbaPrijava.ponisti1(item)  or sluzbaPrijava.pro1(item)}"/>
+                </p:column>
+                    <p:column style="text-align: center">
+                    <p:commandLink value="Обриши тему" action="#{sluzbaPrijava.obrisi1(item)}"  ajax="false" update="sas1"/><br/>
+                    <p:commandLink value="Врати тему" action="#{sluzbaPrijava.vrati1(item)}" ajax="false" update="sas1"/>
+                </p:column>
+            </p:dataTable>
+            </div>
+             
+        </h:form>
+                </p:tab>
+            <p:tab title="Састанци са управом">
+                <h:form>
+                <div align="center">
+                
+                <h:outputText value="Списак састанака"  style="font-size:40px; font-weight: 200; font-style: italic;"/><br/><br/>
+                <p:dataTable value="#{sastanci}" var="item" style="width:100%; border:1px solid black; border-collapse: collapse; font-size: 20px;">
+                <p:column style="text-align: center">
+                    <f:facet name="header">Редни број састанка</f:facet>
+                    <p:outputLabel value="#{item.idSastanak}"/>
+                </p:column>
+                <p:column style="text-align: center">
+                    <f:facet name="header">Први члан комисије</f:facet>
+                    <p:outputLabel value="#{sluzbaPrijava.clan1(item.idUprava1)}"/>
+                </p:column>
+                    <p:column style="text-align: center">
+                    <f:facet name="header">Други члан комисије</f:facet>
+                    <p:outputLabel value="#{sluzbaPrijava.clan2(item.idUprava2)}"/>
+                </p:column>
+                <p:column style="text-align: center">
+                    <f:facet name="header">Датум састанка</f:facet>
+                    <p:outputLabel value="#{item.datum}"/>
+                </p:column>
+                <p:column style="text-align: center">
+                    <f:facet name="header">Одржан</f:facet>
+                    <p:outputLabel value="#{item.odrzan eq 0 ? 'Није одржан' : 'Одржан'}"/>
+                </p:column>
+                    <p:column style="text-align: center">
+                        <f:facet name="header">За пријаву студента</f:facet>
+                    <p:outputLabel value="#{sluzbaPrijava.studentPri(item.idPrijava)}"/>
+                </p:column>
+            </p:dataTable>
+            </div>
+             
+        </h:form>
+            </p:tab>
+            </p:tabView>
+        <br/>
+        <div id="vrh" width="100%" height="100%" style="background-image: url(background-solid-line-cell-wallpaper-preview.jpg); border-bottom: 2px solid beige; padding-bottom: 100px; padding-top:40px; bottom:0;">
+            <h:form>
+            <div align="center" style="padding-top: 5px">
+                <h:commandButton value="Одјавите се" action="#{login.odjava()}" style="font-size: 25px; border-radius: 25pt 25pt; border-style: double; border-width: 2px;"/>
+            </div>
+            </h:form>
+        </div>
+    </h:body>
+</html>
+
